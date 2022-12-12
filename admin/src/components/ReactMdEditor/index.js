@@ -149,17 +149,15 @@ const Editor = ({
                 <svg width="12" height="12" viewBox="0 0 20 20">
                   <path
                     fill="currentColor"
-                    d="M15 9c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm4-7H1c-.55 0-1 .45-1 1v14c0 .55.45 1 1 1h18c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1zm-1 13l-6-5-2 2-4-5-4 8V4h16v11z"
-                  ></path>
+                    d="M25.501,5H6.167V0h19.334V5z M0.168,8.889v5H31.5v-5H0.168z M6.167,17.777v5h19.334v-5H6.167z M0.168,31.668H31.5v-5H0.168
+		V31.668z"
+                  />
                 </svg>
               ),
               execute: (state, api) => {
-                const modifyText = `
-                
-                <div style="text-align: center;">
-                ${state.selectedText}
-                </div>
-                `;
+                const modifyText = `<div align="center">
+${state.selectedText}
+</div>`;
                 api.replaceSelection(modifyText);
               },
             },
