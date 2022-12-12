@@ -70,7 +70,7 @@ const Editor = ({
 }) => {
   const { formatMessage } = useIntl();
   const [mediaLibVisible, setMediaLibVisible] = useState(false);
-  const [ mediaLibSelection, setMediaLibSelection ] = useState(-1);
+  const [mediaLibSelection, setMediaLibSelection] = useState(-1);
 
   const handleToggleMediaLib = () => setMediaLibVisible((prev) => !prev);
 
@@ -79,8 +79,11 @@ const Editor = ({
     assets.map((asset) => {
       if (asset.mime.includes("image")) {
         const imgTag = ` ![](${asset.url}) `;
-        if (mediaLibSelection > -1){
-          newValue = value.substring(0,mediaLibSelection) + imgTag + value.substring(mediaLibSelection)
+        if (mediaLibSelection > -1) {
+          newValue =
+            value.substring(0, mediaLibSelection) +
+            imgTag +
+            value.substring(mediaLibSelection);
         } else {
           newValue = `${newValue}${imgTag}`;
         }
@@ -115,7 +118,6 @@ const Editor = ({
             commands.bold,
             commands.codeBlock,
             commands.italic,
-            commands.strikethrough,
             commands.hr,
             commands.group,
             commands.divider,
@@ -139,14 +141,23 @@ const Editor = ({
                 handleToggleMediaLib();
               },
             },
+            {
+              name: "center",
+              keyCommand: "center",
+              buttonProps: { "aria-label": "Insert title3" },
+              execute: (state, api) => {
+                const modifyText = `
+                
+                <div style="text-align: center;">
+                ${state.selectedText}
+                </div>
+                `;
+                api.replaceSelection(modifyText);
+              },
+            },
             commands.unorderedListCommand,
             commands.orderedListCommand,
             commands.checkedListCommand,
-            commands.divider,
-            commands.codeEdit,
-            commands.codeLive,
-            commands.codePreview,
-            commands.divider,
             commands.fullscreen,
           ]}
           value={value || ""}
